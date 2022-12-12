@@ -12,6 +12,15 @@ function artisan-migrate {
    docker compose exec -u "$(id -u):$(id -g)" -w "/app" viam_fpm /bin/bash -c 'php artisan migrate'
 }
 
+function ci-run-cmd {
+  if [ "${CI}" = "true" ]
+  then
+    /bin/bash -c "${1}"
+  else
+    docker-run-bash "${1}"
+  fi
+}
+
 function compose-up {
   # prepare runtime config
   if [ ! -f .env ]
