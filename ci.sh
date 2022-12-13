@@ -37,12 +37,7 @@ EOF
 }
 
 function ci-run-cmd {
-  if [ "${CI}" = "true" ]
-  then
     /bin/bash -c "${1}"
-  else
-    docker-run-bash "${1}"
-  fi
 }
 
 compose-up
